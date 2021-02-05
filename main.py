@@ -1,15 +1,19 @@
 from tkinter import *
+from tkinter import ttk
 import random
 import time
 import cmath, math
 
+#import input_window as i
+
+
 tk = Tk()
 tk.title("Моделирование подводной лодки")
 tk.resizable(0, 0)
-tk.wm_attributes("-topmost", 1)
+tk.wm_attributes("-topmost", 0)
 canvas = Canvas(tk, width=1200, height=750, highlightthickness=0)
 canvas.pack()
-tk.update()
+#tk.update()
 canvas_height = 500
 canvas_width = 50
 bg = PhotoImage(file="pictures/background.gif")
@@ -21,7 +25,192 @@ for x in range(0, 5):
         canvas.create_image(x * w, y * h, image=bg, anchor='nw')
         sprites = []
         running = True
+window = Toplevel(tk)
 
+
+def new_window(event, window=window):
+    #window.geometry('400x400')
+    window.title('Параметры для расчёта')
+    window.wm_attributes("-topmost", 1)
+    window.wm_attributes('-alpha',0.9)
+    val = StringVar()
+    #entry = Entry(window, textvariable=val)
+
+    tab_control = ttk.Notebook(window)
+    tab1 = ttk.Frame(tab_control)
+    tab2 = ttk.Frame(tab_control)
+    tab_control.add(tab1, text='Переменные грузы')
+    tab_control.add(tab2, text='Вспомогательный балласт')
+    Label(tab1, text="Наименование грузов") \
+        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
+    Label(tab1, text="Нормальная нагрузка") \
+        .grid(row=0, column=1, columnspan=2)
+    Label(tab1, text="Дифференовка за (дата), тс") \
+        .grid(row=0, column=3)
+    Label(tab1, text="Фактическая нагрузка, тс") \
+        .grid(row=0, column=4)
+    Label(tab1, text="Наименование нагрузки") \
+        .grid(row=0, column=5, columnspan=2)
+    Label(tab1, text="p, тс") \
+        .grid(row=1, column=1)
+    Label(tab1, text="х, м") \
+        .grid(row=1, column=2)
+    Label(tab1, text="delta p, тс") \
+        .grid(row=1, column=5)
+    Label(tab1, text="delta M, тс м") \
+        .grid(row=1, column=6)
+    Label(tab1, text="") \
+        .grid(row=2, column=1, columnspan=7)
+
+    Label(tab1, text="Запасные торпеды") \
+        .grid(row=3, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=3, column=6)
+
+    Label(tab1, text="Торпедозаместительные цистерны №1 и 2") \
+        .grid(row=4, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=4, column=6)
+
+    Label(tab1, text="Масло в цистерне судового запаса масла №2") \
+        .grid(row=5, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=5, column=6)
+
+    Label(tab1, text="Масло в цистерне цирукляционного масла №2") \
+        .grid(row=6, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=6, column=6)
+
+    Label(tab1, text="Масло в цистернах грязного масла №1 и 2") \
+        .grid(row=7, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=7, column=6)
+
+    Label(tab1, text="Питательная вода в цистерне №1") \
+        .grid(row=8, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=8, column=6)
+
+    Label(tab1, text="Провизия в цистерне №1") \
+        .grid(row=9, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=9, column=6)
+
+    Label(tab1, text="Провизия в цистерне №5") \
+        .grid(row=10, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=10, column=6)
+
+    Label(tab1, text="Провизия в цистерне №4") \
+        .grid(row=11, column=0)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=1)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=2)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=3)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=4)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=5)
+    Entry(tab1, width=10) \
+        .grid(row=11, column=6)
+
+    Label(tab1, text="Итого переменных грузов") \
+        .grid(row=12, column=0)
+
+    tab_control.pack(expand=1, fill='both')
+    #entry.pack()
+
+
+but = Button(tk, text='Ввести параметры для расчёта:')
+but.bind('<Button->', new_window)
+
+but.pack()
+
+
+# entry.pack()
 
 def system():
     tk.update_idletasks()
@@ -123,8 +312,11 @@ class Submarine:
 
 
 s = Submarine()
-btn1 = Button(tk, text="Всплытие!", command=s.emersion).place(x=75, y=20)
-btn2 = Button(tk, text="Погружение!", command=s.diving).place(x=75, y=100)
+btn1 = Button(tk, text="Всплытие!", command=s.emersion).place(x=1050, y=650)
+btn2 = Button(tk, text="Погружение!", command=s.diving).place(x=1050, y=700)
+
+# btn2 = Button(tk, text="Ввести параметры для расчёта!", command=new_window()).place(x=75, y=100)
+# btn2 = Button(tk, text="Погружение!", command=s.diving).place(x=75, y=100)
 # btn1.pack()
 # btn2.pack()
 
