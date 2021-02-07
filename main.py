@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-import random
+import calculation_of_dif as calc
 import time
 import cmath, math
 
@@ -28,13 +28,24 @@ for x in range(0, 5):
 window = Toplevel(tk)
 
 
+Spare_torpedoes = [0, 0, 0]
+cistern12 = [0, 0, 0]
+oil2_1 = [0, 0, 0]
+oil2_2 = [0, 0, 0]
+oil1_2 = [0, 0, 0]
+water1 = [0, 0, 0]
+food = [0, 0, 0]
+water4 = [0, 0, 0]
+summ = [0, 0]
+
 def new_window(event, window=window):
     #window.geometry('400x400')
     window.title('Параметры для расчёта')
     window.wm_attributes("-topmost", 1)
     window.wm_attributes('-alpha',0.9)
     val = StringVar()
-    #entry = Entry(window, textvariable=val)
+
+    main = Label(window, text ='Всего грузов: ') \
 
     tab_control = ttk.Notebook(window)
     tab1 = ttk.Frame(tab_control)
@@ -62,10 +73,15 @@ def new_window(event, window=window):
     Label(tab1, text="") \
         .grid(row=2, column=1, columnspan=7)
 
+
+
+
     Label(tab1, text="Запасные торпеды") \
         .grid(row=3, column=0)
-    Entry(tab1, width=10) \
+    val1 = StringVar()
+    Entry(tab1, width=10, textvariable=val1) \
         .grid(row=3, column=1)
+
     Entry(tab1, width=10) \
         .grid(row=3, column=2)
     Entry(tab1, width=10) \
@@ -200,10 +216,79 @@ def new_window(event, window=window):
     Label(tab1, text="Итого переменных грузов") \
         .grid(row=12, column=0)
 
+    Label(tab2, text="Наименование грузов") \
+        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
+    Label(tab2, text="Нормальная нагрузка") \
+        .grid(row=0, column=1, columnspan=2)
+    Label(tab2, text="Дифференовка за (дата), тс") \
+        .grid(row=0, column=3)
+    Label(tab2, text="Фактическая нагрузка, тс") \
+        .grid(row=0, column=4)
+    Label(tab2, text="Наименование нагрузки") \
+        .grid(row=0, column=5, columnspan=2)
+    Label(tab2, text="p, тс") \
+        .grid(row=1, column=1)
+    Label(tab2, text="х, м") \
+        .grid(row=1, column=2)
+    Label(tab2, text="delta p, тс") \
+        .grid(row=1, column=5)
+    Label(tab2, text="delta M, тс м") \
+        .grid(row=1, column=6)
+    Label(tab2, text="") \
+        .grid(row=2, column=1, columnspan=7)
+
+    Label(tab2, text="Уравнительная цистерна") \
+        .grid(row=3, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=6)
+
+    Label(tab2, text="Новые дифферентные цистерны") \
+        .grid(row=4, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=6)
+
+    Label(tab2, text="Кормовые дифферентные цистерны") \
+        .grid(row=5, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=6)
+
+    Label(tab2, text="Итого вспомогательного баланса") \
+        .grid(row=6, column=0)
+
     tab_control.pack(expand=1, fill='both')
-    #entry.pack()
+    main.pack()
 
-
+    val1.set(Entry.get())
 but = Button(tk, text='Ввести параметры для расчёта:')
 but.bind('<Button->', new_window)
 
@@ -312,8 +397,8 @@ class Submarine:
 
 
 s = Submarine()
-btn1 = Button(tk, text="Всплытие!", command=s.emersion).place(x=1050, y=650)
-btn2 = Button(tk, text="Погружение!", command=s.diving).place(x=1050, y=700)
+btn1 = Button(tk, text="Всплытие!", command=s.emersion, width=15).place(x=1050, y=650)
+btn2 = Button(tk, text="Погружение!", command=s.diving, width=15).place(x=1050, y=700)
 
 # btn2 = Button(tk, text="Ввести параметры для расчёта!", command=new_window()).place(x=75, y=100)
 # btn2 = Button(tk, text="Погружение!", command=s.diving).place(x=75, y=100)
