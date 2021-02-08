@@ -1,10 +1,7 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 import calculation_of_dif as calc
 import time
-import cmath, math
-
-#import input_window as i
 
 
 tk = Tk()
@@ -13,20 +10,12 @@ tk.resizable(0, 0)
 tk.wm_attributes("-topmost", 0)
 canvas = Canvas(tk, width=1200, height=750, highlightthickness=0)
 canvas.pack()
-#tk.update()
+# tk.update()
 canvas_height = 500
 canvas_width = 50
 bg = PhotoImage(file="pictures/background.gif")
 w = bg.width()
 h = bg.height()
-
-for x in range(0, 5):
-    for y in range(0, 5):
-        canvas.create_image(x * w, y * h, image=bg, anchor='nw')
-        sprites = []
-        running = True
-window = Toplevel(tk)
-
 
 Spare_torpedoes = [0, 0, 0]
 cistern12 = [0, 0, 0]
@@ -38,262 +27,111 @@ food = [0, 0, 0]
 water4 = [0, 0, 0]
 summ = [0, 0]
 
-def new_window(event, window=window):
-    #window.geometry('400x400')
-    window.title('Параметры для расчёта')
-    window.wm_attributes("-topmost", 1)
-    window.wm_attributes('-alpha',0.9)
-    val = StringVar()
 
-    main = Label(window, text ='Всего грузов: ') \
-
-    tab_control = ttk.Notebook(window)
-    tab1 = ttk.Frame(tab_control)
-    tab2 = ttk.Frame(tab_control)
-    tab_control.add(tab1, text='Переменные грузы')
-    tab_control.add(tab2, text='Вспомогательный балласт')
-    Label(tab1, text="Наименование грузов") \
-        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
-    Label(tab1, text="Нормальная нагрузка") \
-        .grid(row=0, column=1, columnspan=2)
-    Label(tab1, text="Дифференовка за (дата), тс") \
-        .grid(row=0, column=3)
-    Label(tab1, text="Фактическая нагрузка, тс") \
-        .grid(row=0, column=4)
-    Label(tab1, text="Наименование нагрузки") \
-        .grid(row=0, column=5, columnspan=2)
-    Label(tab1, text="p, тс") \
-        .grid(row=1, column=1)
-    Label(tab1, text="х, м") \
-        .grid(row=1, column=2)
-    Label(tab1, text="delta p, тс") \
-        .grid(row=1, column=5)
-    Label(tab1, text="delta M, тс м") \
-        .grid(row=1, column=6)
-    Label(tab1, text="") \
-        .grid(row=2, column=1, columnspan=7)
+for x in range(0, 5):
+    for y in range(0, 5):
+        canvas.create_image(x * w, y * h, image=bg, anchor='nw')
+        sprites = []
+        running = True
 
 
+def input_window():
+    input_window = Tk()
+    input_window.geometry("1300x550")
+    input_window.title("Данные для рассчёта")
+    input_window.wm_attributes("-topmost", 1)
+    input_window.wm_attributes('-alpha', 0.5)
+    input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0)
 
 
-    Label(tab1, text="Запасные торпеды") \
-        .grid(row=3, column=0)
-    val1 = StringVar()
-    Entry(tab1, width=10, textvariable=val1) \
-        .grid(row=3, column=1)
+    frame_a = Frame(input_window)   #Для строки заголовков таблицы
+    frame_b = Frame(input_window)   #Заголовок окна
+    frame_c = Frame(frame_a, width = 20)        #Подпункты нормальной нагрузки
+    frame_d = Frame(frame_a)
+    frame_n = Frame(input_window)   #Для итогов
+    title1 = Label(master = frame_b, text='Переменные грузы: ',  anchor='n')
+    lab1 = Label(master = frame_a, width = 50, text="Наименование грузов",  anchor='center')
+    lab2 = Label(master = frame_c, text="Нормальная нагрузка",  anchor='center')
+    lab21 = Label(master = frame_c, width = 10, text="p, тс",  anchor='center')
+    lab22 = Label(master = frame_c, width = 10, text="х, м",  anchor='center')
+    #lab3 = Label(master = frame_a, text="Дифференовка за (дата), тс",  anchor='center')
+    lab4 = Label(master = frame_a, text="Фактическая нагрузка, тс",  anchor='center')
+    lab5 = Label(master = frame_d, text="Изменение нагрузки", anchor='center')
+    lab51 = Label(master = frame_d, text="delta p, тс", anchor='center')
+    lab52 = Label(master = frame_d, text="delta M, тс м", anchor='center')
 
-    Entry(tab1, width=10) \
-        .grid(row=3, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=3, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=3, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=3, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=3, column=6)
+    main_label = Label(master = input_window, text='Всего грузов: ', anchor='w')
+ #Первая строка
+    def calc():
+        lab6_1 = Label(str_1, text=val3 - val1)
+        lab6.pack(side=LEFT, **opts)
+        input_window.update()
 
-    Label(tab1, text="Торпедозаместительные цистерны №1 и 2") \
-        .grid(row=4, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=4, column=6)
+    str_1 = Frame(input_window)
+    lab6 = Label(master = str_1, width=50, text="Запасные торпеды", anchor='center')
+    val1 = IntVar()
+    val2 = IntVar()
+    val3  = IntVar()
 
-    Label(tab1, text="Масло в цистерне судового запаса масла №2") \
-        .grid(row=5, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=5, column=6)
+    ent11 = Entry(str_1, width=10, textvariable = val1)
+    ent12 = Entry(str_1, width=10,textvariable=val2)
+    ent13 = Entry(str_1, width=25, textvariable=val3)
 
-    Label(tab1, text="Масло в цистерне цирукляционного масла №2") \
-        .grid(row=6, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=6, column=6)
+    val1 = int(val1.get())
+    val2 = int(val2.get())
+    val3 = int(val3.get())
 
-    Label(tab1, text="Масло в цистернах грязного масла №1 и 2") \
-        .grid(row=7, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=7, column=6)
+    lab6_1 = Label(str_1, text=val3 - val1)
+    #lab6_1 = Label(str_1, text=int(val1) - int(val2))
+    btn_test = Button(str_1, text = 'Произвести расчёты', command =calc)
 
-    Label(tab1, text="Питательная вода в цистерне №1") \
-        .grid(row=8, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=8, column=6)
 
-    Label(tab1, text="Провизия в цистерне №1") \
-        .grid(row=9, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=9, column=6)
+    opts = {'ipadx':10, 'ipady': 10, "fill": BOTH}
 
-    Label(tab1, text="Провизия в цистерне №5") \
-        .grid(row=10, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=10, column=6)
+    title1.pack(side=TOP, **opts)
+    lab1.pack(side=LEFT, **opts)
 
-    Label(tab1, text="Провизия в цистерне №4") \
-        .grid(row=11, column=0)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=1)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=2)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=3)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=4)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=5)
-    Entry(tab1, width=10) \
-        .grid(row=11, column=6)
+    lab2.pack(side=TOP, **opts)
+    lab21.pack(side=LEFT, **opts)
+    lab22.pack(side=LEFT, **opts)
 
-    Label(tab1, text="Итого переменных грузов") \
-        .grid(row=12, column=0)
+    frame_c.pack(side=LEFT, **opts)
 
-    Label(tab2, text="Наименование грузов") \
-        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
-    Label(tab2, text="Нормальная нагрузка") \
-        .grid(row=0, column=1, columnspan=2)
-    Label(tab2, text="Дифференовка за (дата), тс") \
-        .grid(row=0, column=3)
-    Label(tab2, text="Фактическая нагрузка, тс") \
-        .grid(row=0, column=4)
-    Label(tab2, text="Наименование нагрузки") \
-        .grid(row=0, column=5, columnspan=2)
-    Label(tab2, text="p, тс") \
-        .grid(row=1, column=1)
-    Label(tab2, text="х, м") \
-        .grid(row=1, column=2)
-    Label(tab2, text="delta p, тс") \
-        .grid(row=1, column=5)
-    Label(tab2, text="delta M, тс м") \
-        .grid(row=1, column=6)
-    Label(tab2, text="") \
-        .grid(row=2, column=1, columnspan=7)
+    #lab3.pack(side=LEFT, **opts)
+    lab4.pack(side=LEFT, **opts)
+    lab5.pack(side=TOP, **opts)
+    lab51.pack(side=LEFT, **opts)
+    lab52.pack(side=LEFT, **opts)
+    frame_d.pack(side=LEFT, **opts)
+#Первая строка
+    lab6.pack(side=LEFT, **opts)
+    ent11.pack(side=LEFT, **opts)
+    ent12.pack(side=LEFT, **opts)
+    ent13.pack(side=LEFT, **opts)
+    lab6_1.pack(side=LEFT, **opts)
+    btn_test.pack(side=LEFT, **opts)
 
-    Label(tab2, text="Уравнительная цистерна") \
-        .grid(row=3, column=0)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=1)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=2)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=3)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=6)
+    frame_b.pack(side=TOP, **opts)
+    frame_a.pack(side=TOP, **opts)
+    str_1.pack(side=TOP, **opts)
+    frame_n.pack(side=TOP, **opts)
 
-    Label(tab2, text="Новые дифферентные цистерны") \
-        .grid(row=4, column=0)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=1)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=2)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=3)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=6)
 
-    Label(tab2, text="Кормовые дифферентные цистерны") \
-        .grid(row=5, column=0)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=1)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=2)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=3)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=6)
 
-    Label(tab2, text="Итого вспомогательного баланса") \
-        .grid(row=6, column=0)
 
-    tab_control.pack(expand=1, fill='both')
-    main.pack()
 
-    val1.set(Entry.get())
-but = Button(tk, text='Ввести параметры для расчёта:')
-but.bind('<Button->', new_window)
+    #lab21.pack(side=LEFT, **opts)
+    #lab22.pack(side=LEFT, **opts)
 
-but.pack()
+    #main_label.pack(side=TOP, **opts)
+    input_canvas.pack()
+    input_window.update_idletasks()
+    input_window.update()
 
+
+
+
+btn3 = Button(tk, text="Ввод данных для рассчёта", command=input_window).place(x=500, y=700)
 
 # entry.pack()
 
@@ -301,6 +139,10 @@ def system():
     tk.update_idletasks()
     tk.update()
     time.sleep(0.01)
+
+
+
+
 
 
 class Submarine:
@@ -405,7 +247,4 @@ btn2 = Button(tk, text="Погружение!", command=s.diving, width=15).plac
 # btn1.pack()
 # btn2.pack()
 
-
 mainloop()
-
-##canvas.bind_all('<KeyPress-Return>', movetriangle)
