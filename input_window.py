@@ -49,12 +49,55 @@ oil2_1[2] = IntVar()
 oil2_1[3] = IntVar()
 oil2_1[4] = IntVar()
 
-oil2_2 = [0, 0, 0]
-oil1_2 = [0, 0, 0]
-water1 = [0, 0, 0]
-food = [0, 0, 0]
-water4 = [0, 0, 0]
-summ = [0, 0]
+oil2_2 = [0, 0, 0, 0, 0]
+oil2_2[0] = IntVar()
+oil2_2[1] = IntVar()
+oil2_2[2] = IntVar()
+oil2_2[3] = IntVar()
+oil2_2[4] = IntVar()
+
+oil1_2 = [0, 0, 0, 0, 0]
+oil1_2[0] = IntVar()
+oil1_2[1] = IntVar()
+oil1_2[2] = IntVar()
+oil1_2[3] = IntVar()
+oil1_2[4] = IntVar()
+
+water1 = [0, 0, 0, 0, 0]
+water1[0] = IntVar()
+water1[1] = IntVar()
+water1[2] = IntVar()
+water1[3] = IntVar()
+water1[4] = IntVar()
+
+food = [0, 0, 0, 0, 0]
+food[0] = IntVar()
+food[1] = IntVar()
+food[2] = IntVar()
+food[3] = IntVar()
+food[4] = IntVar()
+
+food5 = [0, 0, 0, 0, 0]
+food5[0] = IntVar()
+food5[1] = IntVar()
+food5[2] = IntVar()
+food5[3] = IntVar()
+food5[4] = IntVar()
+
+water4 = [0, 0, 0, 0, 0]
+water4[0] = IntVar()
+water4[1] = IntVar()
+water4[2] = IntVar()
+water4[3] = IntVar()
+water4[4] = IntVar()
+
+summ = [0, 0, 0, 0, 0]
+summ[0] = IntVar()
+summ[1] = IntVar()
+summ[2] = IntVar()
+summ[3] = IntVar()
+summ[4] = IntVar()
+
 var = 0
 
 \
@@ -131,42 +174,54 @@ def input_window():
 
     Label(tab1, text="Масло в цистерне цирукляционного масла №2") \
         .grid(row=6, column=0)
-
+    en41 = Entry(tab1, width=10, textvariable=oil2_2[0])
+    en42 = Entry(tab1, width=10, textvariable=oil2_2[1])
+    en43 = Entry(tab1, width=10, textvariable=oil2_2[2])
     Entry(tab1, width=10) \
         .grid(row=6, column=3)
 
 
     Label(tab1, text="Масло в цистернах грязного масла №1 и 2") \
         .grid(row=7, column=0)
-
+    en51 = Entry(tab1, width=10, textvariable=oil1_2[0])
+    en52 = Entry(tab1, width=10, textvariable=oil1_2[1])
+    en53 = Entry(tab1, width=10, textvariable=oil1_2[2])
     Entry(tab1, width=10) \
         .grid(row=7, column=3)
 
 
     Label(tab1, text="Питательная вода в цистерне №1") \
         .grid(row=8, column=0)
-
+    en61 = Entry(tab1, width=10, textvariable=water1[0])
+    en62 = Entry(tab1, width=10, textvariable=water1[1])
+    en63 = Entry(tab1, width=10, textvariable=water1[2])
     Entry(tab1, width=10) \
         .grid(row=8, column=3)
 
 
     Label(tab1, text="Провизия в цистерне №1") \
         .grid(row=9, column=0)
-
+    en71 = Entry(tab1, width=10, textvariable=food[0])
+    en72 = Entry(tab1, width=10, textvariable=food[1])
+    en73 = Entry(tab1, width=10, textvariable=food[2])
     Entry(tab1, width=10) \
         .grid(row=9, column=3)
 
 
     Label(tab1, text="Провизия в цистерне №5") \
         .grid(row=10, column=0)
-
+    en81 = Entry(tab1, width=10, textvariable=food5[0])
+    en82 = Entry(tab1, width=10, textvariable=food5[1])
+    en83 = Entry(tab1, width=10, textvariable=food5[2])
     Entry(tab1, width=10) \
         .grid(row=10, column=3)
 
 
     Label(tab1, text="Провизия в цистерне №4") \
         .grid(row=11, column=0)
-
+    en91 = Entry(tab1, width=10, textvariable=water4[0])
+    en92 = Entry(tab1, width=10, textvariable=water4[1])
+    en93 = Entry(tab1, width=10, textvariable=water4[2])
     Entry(tab1, width=10) \
         .grid(row=11, column=3)
 
@@ -279,6 +334,72 @@ def input_window():
             text55 = Label(tab1, text=str(oil2_1[3].get()))
             text56 = Label(tab1, text=str(oil2_1[4].get()))
 
+            oil2_2[0].set(en41.get())
+            print(oil2_2[0].get())
+            oil2_2[1].set(en42.get())
+            print(oil2_2[1].get())
+            oil2_2[2].set(en43.get())
+            print(oil2_2[2].get())
+            oil2_2[3].set(oil2_2[2].get() - oil2_2[0].get())
+            oil2_2[4].set(oil2_2[3].get() * oil2_2[1].get())
+            text65 = Label(tab1, text=str(oil2_2[3].get()))
+            text66 = Label(tab1, text=str(oil2_2[4].get()))
+
+            oil1_2[0].set(en51.get())
+            print(oil1_2[0].get())
+            oil1_2[1].set(en52.get())
+            print(oil1_2[1].get())
+            oil1_2[2].set(en53.get())
+            print(oil1_2[2].get())
+            oil1_2[3].set(oil1_2[2].get() - oil1_2[0].get())
+            oil1_2[4].set(oil1_2[3].get() * oil1_2[1].get())
+            text75 = Label(tab1, text=str(oil1_2[3].get()))
+            text76 = Label(tab1, text=str(oil1_2[4].get()))
+
+            water1[0].set(en61.get())
+            print(water1[0].get())
+            water1[1].set(en62.get())
+            print(water1[1].get())
+            water1[2].set(en63.get())
+            print(water1[2].get())
+            water1[3].set(water1[2].get() - water1[0].get())
+            water1[4].set(water1[3].get() * water1[1].get())
+            text85 = Label(tab1, text=str(water1[3].get()))
+            text86 = Label(tab1, text=str(water1[4].get()))
+
+            food[0].set(en71.get())
+            print(food[0].get())
+            food[1].set(en72.get())
+            print(food[1].get())
+            food[2].set(en73.get())
+            print(food[2].get())
+            food[3].set(food[2].get() - food[0].get())
+            food[4].set(food[3].get() * food[1].get())
+            text95 = Label(tab1, text=str(food[3].get()))
+            text96 = Label(tab1, text=str(food[4].get()))
+
+            food5[0].set(en81.get())
+            print(food5[0].get())
+            food5[1].set(en82.get())
+            print(food5[1].get())
+            food5[2].set(en83.get())
+            print(food5[2].get())
+            food5[3].set(food5[2].get() - food5[0].get())
+            food5[4].set(food5[3].get() * food5[1].get())
+            text105 = Label(tab1, text=str(food5[3].get()))
+            text106 = Label(tab1, text=str(food5[4].get()))
+
+            water4[0].set(en81.get())
+            print(water4[0].get())
+            water4[1].set(en82.get())
+            print(water4[1].get())
+            water4[2].set(en83.get())
+            print(water4[2].get())
+            water4[3].set(water4[2].get() - water4[0].get())
+            food[4].set(water4[3].get() * water4[1].get())
+            text115 = Label(tab1, text=str(water4[3].get()))
+            text116 = Label(tab1, text=str(water4[4].get()))
+
 
             text35.grid(row=3, column=5)
             text36.grid(row=3, column=6)
@@ -286,6 +407,18 @@ def input_window():
             text46.grid(row=4, column=6)
             text55.grid(row=5, column=5)
             text56.grid(row=5, column=6)
+            text65.grid(row=6, column=5)
+            text66.grid(row=6, column=6)
+            text75.grid(row=7, column=5)
+            text76.grid(row=7, column=6)
+            text85.grid(row=8, column=5)
+            text86.grid(row=8, column=6)
+            text95.grid(row=9, column=5)
+            text96.grid(row=9, column=6)
+            text105.grid(row=10, column=5)
+            text106.grid(row=10, column=6)
+            text115.grid(row=11, column=5)
+            text116.grid(row=11, column=6)
 
             input_window.update_idletasks()
             input_window.update()
@@ -303,6 +436,25 @@ def input_window():
     en31.grid(row=5, column=1)
     en32.grid(row=5, column=2)
     en33.grid(row=5, column=4)
+    en41.grid(row=6, column=1)
+    en42.grid(row=6, column=2)
+    en43.grid(row=6, column=4)
+    en51.grid(row=7, column=1)
+    en52.grid(row=7, column=2)
+    en53.grid(row=7, column=4)
+    en61.grid(row=8, column=1)
+    en62.grid(row=8, column=2)
+    en63.grid(row=8, column=4)
+    en71.grid(row=9, column=1)
+    en72.grid(row=9, column=2)
+    en73.grid(row=9, column=4)
+    en81.grid(row=10, column=1)
+    en82.grid(row=10, column=2)
+    en83.grid(row=10, column=4)
+    en91.grid(row=11, column=1)
+    en92.grid(row=11, column=2)
+    en93.grid(row=11, column=4)
+
     #text35.grid(row=3, column=5)
 
 

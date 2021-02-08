@@ -17,15 +17,6 @@ bg = PhotoImage(file="pictures/background.gif")
 w = bg.width()
 h = bg.height()
 
-Spare_torpedoes = [0, 0, 0]
-cistern12 = [0, 0, 0]
-oil2_1 = [0, 0, 0]
-oil2_2 = [0, 0, 0]
-oil1_2 = [0, 0, 0]
-water1 = [0, 0, 0]
-food = [0, 0, 0]
-water4 = [0, 0, 0]
-summ = [0, 0]
 
 
 for x in range(0, 5):
@@ -35,103 +26,450 @@ for x in range(0, 5):
         running = True
 
 
+Spare_torpedoes = [0, 0, 0, 0, 0]
+
+Spare_torpedoes[0] = IntVar()
+Spare_torpedoes[1] = IntVar()
+Spare_torpedoes[2] = IntVar()
+Spare_torpedoes[3] = IntVar()
+Spare_torpedoes[4] = IntVar()
+
+
+cistern12 = [0, 0, 0, 0, 0]
+cistern12[0] = IntVar()
+cistern12[1] = IntVar()
+cistern12[2] = IntVar()
+cistern12[3] = IntVar()
+cistern12[4] = IntVar()
+
+oil2_1 = [0, 0, 0, 0, 0]
+oil2_1[0] = IntVar()
+oil2_1[1] = IntVar()
+oil2_1[2] = IntVar()
+oil2_1[3] = IntVar()
+oil2_1[4] = IntVar()
+
+oil2_2 = [0, 0, 0, 0, 0]
+oil2_2[0] = IntVar()
+oil2_2[1] = IntVar()
+oil2_2[2] = IntVar()
+oil2_2[3] = IntVar()
+oil2_2[4] = IntVar()
+
+oil1_2 = [0, 0, 0, 0, 0]
+oil1_2[0] = IntVar()
+oil1_2[1] = IntVar()
+oil1_2[2] = IntVar()
+oil1_2[3] = IntVar()
+oil1_2[4] = IntVar()
+
+water1 = [0, 0, 0, 0, 0]
+water1[0] = IntVar()
+water1[1] = IntVar()
+water1[2] = IntVar()
+water1[3] = IntVar()
+water1[4] = IntVar()
+
+food = [0, 0, 0, 0, 0]
+food[0] = IntVar()
+food[1] = IntVar()
+food[2] = IntVar()
+food[3] = IntVar()
+food[4] = IntVar()
+
+food5 = [0, 0, 0, 0, 0]
+food5[0] = IntVar()
+food5[1] = IntVar()
+food5[2] = IntVar()
+food5[3] = IntVar()
+food5[4] = IntVar()
+
+water4 = [0, 0, 0, 0, 0]
+water4[0] = IntVar()
+water4[1] = IntVar()
+water4[2] = IntVar()
+water4[3] = IntVar()
+water4[4] = IntVar()
+
+summ = [0, 0, 0, 0, 0]
+summ[0] = IntVar()
+summ[1] = IntVar()
+summ[2] = IntVar()
+summ[3] = IntVar()
+summ[4] = IntVar()
+
+var = 0
+
+\
 def input_window():
     input_window = Tk()
-    input_window.geometry("1300x550")
+    input_window.geometry("1300x450")
     input_window.title("Данные для рассчёта")
     input_window.wm_attributes("-topmost", 1)
     input_window.wm_attributes('-alpha', 0.5)
     input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0)
 
+    main = Label(input_window, text ='Всего грузов: ') \
 
-    frame_a = Frame(input_window)   #Для строки заголовков таблицы
-    frame_b = Frame(input_window)   #Заголовок окна
-    frame_c = Frame(frame_a, width = 20)        #Подпункты нормальной нагрузки
-    frame_d = Frame(frame_a)
-    frame_n = Frame(input_window)   #Для итогов
-    title1 = Label(master = frame_b, text='Переменные грузы: ',  anchor='n')
-    lab1 = Label(master = frame_a, width = 50, text="Наименование грузов",  anchor='center')
-    lab2 = Label(master = frame_c, text="Нормальная нагрузка",  anchor='center')
-    lab21 = Label(master = frame_c, width = 10, text="p, тс",  anchor='center')
-    lab22 = Label(master = frame_c, width = 10, text="х, м",  anchor='center')
-    #lab3 = Label(master = frame_a, text="Дифференовка за (дата), тс",  anchor='center')
-    lab4 = Label(master = frame_a, text="Фактическая нагрузка, тс",  anchor='center')
-    lab5 = Label(master = frame_d, text="Изменение нагрузки", anchor='center')
-    lab51 = Label(master = frame_d, text="delta p, тс", anchor='center')
-    lab52 = Label(master = frame_d, text="delta M, тс м", anchor='center')
+    tab_control = ttk.Notebook(input_window)
+    tab1 = ttk.Frame(tab_control)
+    tab2 = ttk.Frame(tab_control)
+    tab_control.add(tab1, text='Переменные грузы')
+    tab_control.add(tab2, text='Вспомогательный балласт')
+    Label(tab1, text="Наименование грузов") \
+        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
+    Label(tab1, text="Нормальная нагрузка") \
+        .grid(row=0, column=1, columnspan=2)
+    Label(tab1, text="Дифференовка за (дата), тс") \
+        .grid(row=0, column=3)
+    Label(tab1, text="Фактическая нагрузка, тс") \
+        .grid(row=0, column=4)
+    Label(tab1, text="Наименование нагрузки") \
+        .grid(row=0, column=5, columnspan=2)
+    Label(tab1, text="p, тс") \
+        .grid(row=1, column=1)
+    Label(tab1, text="х, м") \
+        .grid(row=1, column=2)
+    Label(tab1, text="delta p, тс") \
+        .grid(row=1, column=5)
+    Label(tab1, text="delta M, тс м") \
+        .grid(row=1, column=6)
+    Label(tab1, text="") \
+        .grid(row=2, column=1, columnspan=7)
 
-    main_label = Label(master = input_window, text='Всего грузов: ', anchor='w')
- #Первая строка
+
+
+
+    Label(tab1, text="Запасные торпеды") \
+        .grid(row=3, column=0)
+
+    en11 = Entry(tab1, width=10, textvariable=Spare_torpedoes[0])
+    en12 = Entry(tab1, width=10, textvariable=Spare_torpedoes[1])
+    en13 = Entry(tab1, width=10, textvariable=Spare_torpedoes[2])
+
+    Entry(tab1, width=10) \
+        .grid(row=3, column=3)
+
+
+    Label(tab1, text="Торпедозаместительные цистерны №1 и 2") \
+        .grid(row=4, column=0)
+    en21 = Entry(tab1, width=10, textvariable=cistern12[0])
+    en22 = Entry(tab1, width=10, textvariable=cistern12[1])
+    en23 = Entry(tab1, width=10, textvariable=cistern12[2])
+
+
+    Entry(tab1, width=10) \
+        .grid(row=4, column=3)
+
+
+    Label(tab1, text="Масло в цистерне судового запаса масла №2") \
+        .grid(row=5, column=0)
+    en31 = Entry(tab1, width=10, textvariable=oil2_1[0])
+    en32 = Entry(tab1, width=10, textvariable=oil2_1[1])
+    en33 = Entry(tab1, width=10, textvariable=oil2_1[2])
+
+    Entry(tab1, width=10) \
+        .grid(row=5, column=3)
+
+
+    Label(tab1, text="Масло в цистерне цирукляционного масла №2") \
+        .grid(row=6, column=0)
+    en41 = Entry(tab1, width=10, textvariable=oil2_2[0])
+    en42 = Entry(tab1, width=10, textvariable=oil2_2[1])
+    en43 = Entry(tab1, width=10, textvariable=oil2_2[2])
+    Entry(tab1, width=10) \
+        .grid(row=6, column=3)
+
+
+    Label(tab1, text="Масло в цистернах грязного масла №1 и 2") \
+        .grid(row=7, column=0)
+    en51 = Entry(tab1, width=10, textvariable=oil1_2[0])
+    en52 = Entry(tab1, width=10, textvariable=oil1_2[1])
+    en53 = Entry(tab1, width=10, textvariable=oil1_2[2])
+    Entry(tab1, width=10) \
+        .grid(row=7, column=3)
+
+
+    Label(tab1, text="Питательная вода в цистерне №1") \
+        .grid(row=8, column=0)
+    en61 = Entry(tab1, width=10, textvariable=water1[0])
+    en62 = Entry(tab1, width=10, textvariable=water1[1])
+    en63 = Entry(tab1, width=10, textvariable=water1[2])
+    Entry(tab1, width=10) \
+        .grid(row=8, column=3)
+
+
+    Label(tab1, text="Провизия в цистерне №1") \
+        .grid(row=9, column=0)
+    en71 = Entry(tab1, width=10, textvariable=food[0])
+    en72 = Entry(tab1, width=10, textvariable=food[1])
+    en73 = Entry(tab1, width=10, textvariable=food[2])
+    Entry(tab1, width=10) \
+        .grid(row=9, column=3)
+
+
+    Label(tab1, text="Провизия в цистерне №5") \
+        .grid(row=10, column=0)
+    en81 = Entry(tab1, width=10, textvariable=food5[0])
+    en82 = Entry(tab1, width=10, textvariable=food5[1])
+    en83 = Entry(tab1, width=10, textvariable=food5[2])
+    Entry(tab1, width=10) \
+        .grid(row=10, column=3)
+
+
+    Label(tab1, text="Провизия в цистерне №4") \
+        .grid(row=11, column=0)
+    en91 = Entry(tab1, width=10, textvariable=water4[0])
+    en92 = Entry(tab1, width=10, textvariable=water4[1])
+    en93 = Entry(tab1, width=10, textvariable=water4[2])
+    Entry(tab1, width=10) \
+        .grid(row=11, column=3)
+
+
+    Label(tab1, text="Итого переменных грузов") \
+        .grid(row=12, column=0)
+
+    Label(tab2, text="Наименование грузов") \
+        .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
+    Label(tab2, text="Нормальная нагрузка") \
+        .grid(row=0, column=1, columnspan=2)
+    Label(tab2, text="Дифференовка за (дата), тс") \
+        .grid(row=0, column=3)
+    Label(tab2, text="Фактическая нагрузка, тс") \
+        .grid(row=0, column=4)
+    Label(tab2, text="Наименование нагрузки") \
+        .grid(row=0, column=5, columnspan=2)
+    Label(tab2, text="p, тс") \
+        .grid(row=1, column=1)
+    Label(tab2, text="х, м") \
+        .grid(row=1, column=2)
+    Label(tab2, text="delta p, тс") \
+        .grid(row=1, column=5)
+    Label(tab2, text="delta M, тс м") \
+        .grid(row=1, column=6)
+    Label(tab2, text="") \
+        .grid(row=2, column=1, columnspan=7)
+
+    Label(tab2, text="Уравнительная цистерна") \
+        .grid(row=3, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=3, column=6)
+
+    Label(tab2, text="Новые дифферентные цистерны") \
+        .grid(row=4, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=4, column=6)
+
+    Label(tab2, text="Кормовые дифферентные цистерны") \
+        .grid(row=5, column=0)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=1)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=2)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=3)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=4)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=5)
+    Entry(tab2, width=10) \
+        .grid(row=5, column=6)
+
+    Label(tab2, text="Итого вспомогательного баланса") \
+        .grid(row=6, column=0)
+
+
     def calc():
-        lab6_1 = Label(str_1, text=val3 - val1)
-        lab6.pack(side=LEFT, **opts)
-        input_window.update()
+        try:
+            Spare_torpedoes[0].set(en11.get())
+            print(Spare_torpedoes[0].get())
+            Spare_torpedoes[1].set(en12.get())
+            print(Spare_torpedoes[1].get())
+            Spare_torpedoes[2].set(en13.get())
+            print(Spare_torpedoes[2].get())
+            Spare_torpedoes[3].set(Spare_torpedoes[2].get() - Spare_torpedoes[0].get())
+            Spare_torpedoes[4].set(Spare_torpedoes[3].get() * Spare_torpedoes[1].get())
+            text35 = Label(tab1, text=str(Spare_torpedoes[3].get()))
+            text36 = Label(tab1, text=str(Spare_torpedoes[4].get()))
 
-    str_1 = Frame(input_window)
-    lab6 = Label(master = str_1, width=50, text="Запасные торпеды", anchor='center')
-    val1 = IntVar()
-    val2 = IntVar()
-    val3  = IntVar()
+            cistern12[0].set(en21.get())
+            print(cistern12[0].get())
+            cistern12[1].set(en22.get())
+            print(cistern12[1].get())
+            cistern12[2].set(en23.get())
+            print(cistern12[2].get())
+            cistern12[3].set(cistern12[2].get() - cistern12[0].get())
+            cistern12[4].set(cistern12[3].get() * cistern12[1].get())
+            text45 = Label(tab1, text=str(cistern12[3].get()))
+            text46 = Label(tab1, text=str(cistern12[4].get()))
 
-    ent11 = Entry(str_1, width=10, textvariable = val1)
-    ent12 = Entry(str_1, width=10,textvariable=val2)
-    ent13 = Entry(str_1, width=25, textvariable=val3)
+            oil2_1[0].set(en31.get())
+            print(oil2_1[0].get())
+            oil2_1[1].set(en32.get())
+            print(oil2_1[1].get())
+            oil2_1[2].set(en33.get())
+            print(oil2_1[2].get())
+            oil2_1[3].set(oil2_1[2].get() - oil2_1[0].get())
+            oil2_1[4].set(oil2_1[3].get() * oil2_1[1].get())
+            text55 = Label(tab1, text=str(oil2_1[3].get()))
+            text56 = Label(tab1, text=str(oil2_1[4].get()))
 
-    val1 = int(val1.get())
-    val2 = int(val2.get())
-    val3 = int(val3.get())
+            oil2_2[0].set(en41.get())
+            print(oil2_2[0].get())
+            oil2_2[1].set(en42.get())
+            print(oil2_2[1].get())
+            oil2_2[2].set(en43.get())
+            print(oil2_2[2].get())
+            oil2_2[3].set(oil2_2[2].get() - oil2_2[0].get())
+            oil2_2[4].set(oil2_2[3].get() * oil2_2[1].get())
+            text65 = Label(tab1, text=str(oil2_2[3].get()))
+            text66 = Label(tab1, text=str(oil2_2[4].get()))
 
-    lab6_1 = Label(str_1, text=val3 - val1)
-    #lab6_1 = Label(str_1, text=int(val1) - int(val2))
-    btn_test = Button(str_1, text = 'Произвести расчёты', command =calc)
+            oil1_2[0].set(en51.get())
+            print(oil1_2[0].get())
+            oil1_2[1].set(en52.get())
+            print(oil1_2[1].get())
+            oil1_2[2].set(en53.get())
+            print(oil1_2[2].get())
+            oil1_2[3].set(oil1_2[2].get() - oil1_2[0].get())
+            oil1_2[4].set(oil1_2[3].get() * oil1_2[1].get())
+            text75 = Label(tab1, text=str(oil1_2[3].get()))
+            text76 = Label(tab1, text=str(oil1_2[4].get()))
+
+            water1[0].set(en61.get())
+            print(water1[0].get())
+            water1[1].set(en62.get())
+            print(water1[1].get())
+            water1[2].set(en63.get())
+            print(water1[2].get())
+            water1[3].set(water1[2].get() - water1[0].get())
+            water1[4].set(water1[3].get() * water1[1].get())
+            text85 = Label(tab1, text=str(water1[3].get()))
+            text86 = Label(tab1, text=str(water1[4].get()))
+
+            food[0].set(en71.get())
+            print(food[0].get())
+            food[1].set(en72.get())
+            print(food[1].get())
+            food[2].set(en73.get())
+            print(food[2].get())
+            food[3].set(food[2].get() - food[0].get())
+            food[4].set(food[3].get() * food[1].get())
+            text95 = Label(tab1, text=str(food[3].get()))
+            text96 = Label(tab1, text=str(food[4].get()))
+
+            food5[0].set(en81.get())
+            print(food5[0].get())
+            food5[1].set(en82.get())
+            print(food5[1].get())
+            food5[2].set(en83.get())
+            print(food5[2].get())
+            food5[3].set(food5[2].get() - food5[0].get())
+            food5[4].set(food5[3].get() * food5[1].get())
+            text105 = Label(tab1, text=str(food5[3].get()))
+            text106 = Label(tab1, text=str(food5[4].get()))
+
+            water4[0].set(en81.get())
+            print(water4[0].get())
+            water4[1].set(en82.get())
+            print(water4[1].get())
+            water4[2].set(en83.get())
+            print(water4[2].get())
+            water4[3].set(water4[2].get() - water4[0].get())
+            food[4].set(water4[3].get() * water4[1].get())
+            text115 = Label(tab1, text=str(water4[3].get()))
+            text116 = Label(tab1, text=str(water4[4].get()))
 
 
-    opts = {'ipadx':10, 'ipady': 10, "fill": BOTH}
+            text35.grid(row=3, column=5)
+            text36.grid(row=3, column=6)
+            text45.grid(row=4, column=5)
+            text46.grid(row=4, column=6)
+            text55.grid(row=5, column=5)
+            text56.grid(row=5, column=6)
+            text65.grid(row=6, column=5)
+            text66.grid(row=6, column=6)
+            text75.grid(row=7, column=5)
+            text76.grid(row=7, column=6)
+            text85.grid(row=8, column=5)
+            text86.grid(row=8, column=6)
+            text95.grid(row=9, column=5)
+            text96.grid(row=9, column=6)
+            text105.grid(row=10, column=5)
+            text106.grid(row=10, column=6)
+            text115.grid(row=11, column=5)
+            text116.grid(row=11, column=6)
 
-    title1.pack(side=TOP, **opts)
-    lab1.pack(side=LEFT, **opts)
-
-    lab2.pack(side=TOP, **opts)
-    lab21.pack(side=LEFT, **opts)
-    lab22.pack(side=LEFT, **opts)
-
-    frame_c.pack(side=LEFT, **opts)
-
-    #lab3.pack(side=LEFT, **opts)
-    lab4.pack(side=LEFT, **opts)
-    lab5.pack(side=TOP, **opts)
-    lab51.pack(side=LEFT, **opts)
-    lab52.pack(side=LEFT, **opts)
-    frame_d.pack(side=LEFT, **opts)
-#Первая строка
-    lab6.pack(side=LEFT, **opts)
-    ent11.pack(side=LEFT, **opts)
-    ent12.pack(side=LEFT, **opts)
-    ent13.pack(side=LEFT, **opts)
-    lab6_1.pack(side=LEFT, **opts)
-    btn_test.pack(side=LEFT, **opts)
-
-    frame_b.pack(side=TOP, **opts)
-    frame_a.pack(side=TOP, **opts)
-    str_1.pack(side=TOP, **opts)
-    frame_n.pack(side=TOP, **opts)
+            input_window.update_idletasks()
+            input_window.update()
+        except:
+            pass
 
 
+    btn_test = Button(tab1, text='Рассчитать', command=calc).grid(row=13, column=5)
+    en11.grid(row=3, column=1)
+    en12.grid(row=3, column=2)
+    en13.grid(row=3, column=4)
+    en21.grid(row=4, column=1)
+    en22.grid(row=4, column=2)
+    en23.grid(row=4, column=4)
+    en31.grid(row=5, column=1)
+    en32.grid(row=5, column=2)
+    en33.grid(row=5, column=4)
+    en41.grid(row=6, column=1)
+    en42.grid(row=6, column=2)
+    en43.grid(row=6, column=4)
+    en51.grid(row=7, column=1)
+    en52.grid(row=7, column=2)
+    en53.grid(row=7, column=4)
+    en61.grid(row=8, column=1)
+    en62.grid(row=8, column=2)
+    en63.grid(row=8, column=4)
+    en71.grid(row=9, column=1)
+    en72.grid(row=9, column=2)
+    en73.grid(row=9, column=4)
+    en81.grid(row=10, column=1)
+    en82.grid(row=10, column=2)
+    en83.grid(row=10, column=4)
+    en91.grid(row=11, column=1)
+    en92.grid(row=11, column=2)
+    en93.grid(row=11, column=4)
+
+    #text35.grid(row=3, column=5)
 
 
-
-    #lab21.pack(side=LEFT, **opts)
-    #lab22.pack(side=LEFT, **opts)
-
-    #main_label.pack(side=TOP, **opts)
+    tab_control.pack(expand=1, fill='both')
     input_canvas.pack()
     input_window.update_idletasks()
     input_window.update()
+
+    main.pack()
 
 
 
 
 btn3 = Button(tk, text="Ввод данных для рассчёта", command=input_window).place(x=500, y=700)
+# entry.pack()
 
 # entry.pack()
 
