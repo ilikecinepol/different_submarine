@@ -44,7 +44,7 @@ def input_window():
     input_window.title("Данные для рассчёта")
     input_window.wm_attributes("-topmost", 1)
     input_window.wm_attributes('-alpha', 0.5)
-    input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0)
+    input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0, bg='blue')
 
 def new_window(event, window=window):
     #window.geometry('400x400')

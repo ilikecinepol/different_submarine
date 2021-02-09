@@ -103,11 +103,11 @@ var = 0
 \
 def input_window():
     input_window = Tk()
-    input_window.geometry("1300x450")
+    input_window.geometry("1100x400")
     input_window.title("Данные для рассчёта")
     input_window.wm_attributes("-topmost", 1)
-    input_window.wm_attributes('-alpha', 0.5)
-    input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0)
+    input_window.wm_attributes('-alpha', 0)
+    #input_canvas = Canvas(input_window, width=800, height=750, highlightthickness=0, bg ='blue')
 
     main = Label(input_window, text ='Всего грузов: ') \
 
@@ -229,6 +229,11 @@ def input_window():
     Label(tab1, text="Итого переменных грузов") \
         .grid(row=12, column=0)
 
+
+
+
+    #Вторая вкладка
+
     Label(tab2, text="Наименование грузов") \
         .grid(row=0, column=0, rowspan=2, pady=10, padx=10)
     Label(tab2, text="Нормальная нагрузка") \
@@ -297,6 +302,11 @@ def input_window():
 
     Label(tab2, text="Итого вспомогательного баланса") \
         .grid(row=6, column=0)
+
+
+
+
+
 
 
     def calc():
@@ -426,7 +436,7 @@ def input_window():
             pass
 
 
-    btn_test = Button(tab1, text='Рассчитать', command=calc).grid(row=13, column=5)
+    btn_test = Button(tab1, text='Рассчитать', command=calc).grid(row=13, column=3)
     en11.grid(row=3, column=1)
     en12.grid(row=3, column=2)
     en13.grid(row=3, column=4)
