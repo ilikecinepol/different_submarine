@@ -98,6 +98,27 @@ summ[2] = IntVar()
 summ[3] = IntVar()
 summ[4] = IntVar()
 
+equalization_tank = [0, 0, 0, 0, 0]
+equalization_tank[0] = IntVar()
+equalization_tank[1] = IntVar()
+equalization_tank[2] = IntVar()
+equalization_tank[3] = IntVar()
+equalization_tank[4] = IntVar()
+
+new_trim_systems = [0, 0, 0, 0, 0]
+new_trim_systems[0] = IntVar()
+new_trim_systems[1] = IntVar()
+new_trim_systems[2] = IntVar()
+new_trim_systems[3] = IntVar()
+new_trim_systems[4] = IntVar()
+
+aft_trim_systems = [0, 0, 0, 0, 0]
+aft_trim_systems[0] = IntVar()
+aft_trim_systems[1] = IntVar()
+aft_trim_systems[2] = IntVar()
+aft_trim_systems[3] = IntVar()
+aft_trim_systems[4] = IntVar()
+
 var = 0
 
 \
@@ -265,10 +286,7 @@ def input_window():
         .grid(row=3, column=3)
     Entry(tab2, width=10) \
         .grid(row=3, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=3, column=6)
+
 
     Label(tab2, text="Новые дифферентные цистерны") \
         .grid(row=4, column=0)
@@ -280,10 +298,7 @@ def input_window():
         .grid(row=4, column=3)
     Entry(tab2, width=10) \
         .grid(row=4, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=4, column=6)
+
 
     Label(tab2, text="Кормовые дифферентные цистерны") \
         .grid(row=5, column=0)
@@ -295,10 +310,6 @@ def input_window():
         .grid(row=5, column=3)
     Entry(tab2, width=10) \
         .grid(row=5, column=4)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=5)
-    Entry(tab2, width=10) \
-        .grid(row=5, column=6)
 
     Label(tab2, text="Итого вспомогательного баланса") \
         .grid(row=6, column=0)
@@ -437,6 +448,7 @@ def input_window():
 
 
     btn_test = Button(tab1, text='Рассчитать', command=calc).grid(row=13, column=3)
+    btn_test = Button(tab2, text='Рассчитать', command=calc).grid(row=13, column=3)
     en11.grid(row=3, column=1)
     en12.grid(row=3, column=2)
     en13.grid(row=3, column=4)
