@@ -2,6 +2,8 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import calculation_of_dif as calc
 import time
+import math
+from PIL import ImageTk
 
 
 tk = Tk()
@@ -91,12 +93,19 @@ water4[2] = IntVar()
 water4[3] = IntVar()
 water4[4] = IntVar()
 
-summ = [0, 0, 0, 0, 0]
-summ[0] = IntVar()
-summ[1] = IntVar()
-summ[2] = IntVar()
-summ[3] = IntVar()
-summ[4] = IntVar()
+summ1 = [0, 0, 0, 0, 0]
+summ1[0] = IntVar()
+summ1[1] = IntVar()
+summ1[2] = IntVar()
+summ1[3] = IntVar()
+summ1[4] = IntVar()
+
+summ2 = [0, 0, 0, 0, 0]
+summ2[0] = IntVar()
+summ2[1] = IntVar()
+summ2[2] = IntVar()
+summ2[3] = IntVar()
+summ2[4] = IntVar()
 
 equalization_tank = [0, 0, 0, 0, 0]
 equalization_tank[0] = IntVar()
@@ -220,7 +229,7 @@ def input_window():
         .grid(row=8, column=3)
 
 
-    Label(tab1, text="Провизия в цистерне №1") \
+    Label(tab1, text="Провизия в цистерне №5") \
         .grid(row=9, column=0)
     en71 = Entry(tab1, width=10, textvariable=food[0])
     en72 = Entry(tab1, width=10, textvariable=food[1])
@@ -229,7 +238,7 @@ def input_window():
         .grid(row=9, column=3)
 
 
-    Label(tab1, text="Провизия в цистерне №5") \
+    Label(tab1, text="Пресная вода в цистерне №4") \
         .grid(row=10, column=0)
     en81 = Entry(tab1, width=10, textvariable=food5[0])
     en82 = Entry(tab1, width=10, textvariable=food5[1])
@@ -238,17 +247,10 @@ def input_window():
         .grid(row=10, column=3)
 
 
-    Label(tab1, text="Провизия в цистерне №4") \
-        .grid(row=11, column=0)
-    en91 = Entry(tab1, width=10, textvariable=water4[0])
-    en92 = Entry(tab1, width=10, textvariable=water4[1])
-    en93 = Entry(tab1, width=10, textvariable=water4[2])
-    Entry(tab1, width=10) \
-        .grid(row=11, column=3)
-
-
     Label(tab1, text="Итого переменных грузов") \
-        .grid(row=12, column=0)
+        .grid(row=11, column=0)
+
+
 
 
 
@@ -410,17 +412,23 @@ def input_window():
             text105 = Label(tab1, text=str(food5[3].get()))
             text106 = Label(tab1, text=str(food5[4].get()))
 
-            water4[0].set(en81.get())
-            print(water4[0].get())
-            water4[1].set(en82.get())
-            print(water4[1].get())
-            water4[2].set(en83.get())
-            print(water4[2].get())
-            water4[3].set(water4[2].get() - water4[0].get())
-            food[4].set(water4[3].get() * water4[1].get())
-            text115 = Label(tab1, text=str(water4[3].get()))
-            text116 = Label(tab1, text=str(water4[4].get()))
+            #строка ИТОГО первой вкладки
+            summ1[0].set(Spare_torpedoes[0].get() +  cistern12[0].get() + oil2_1[0].get() + oil2_2[0].get() + oil1_2[0].get() + water1[0].get() + food[0].get() + food5[0].get())
+            summ1[2].set(Spare_torpedoes[2].get() + cistern12[2].get() + oil2_1[2].get() + oil2_2[2].get() + oil1_2[2].get() + water1[2].get() + food[2].get() + food5[2].get())
+            summ1[3].set(
+                Spare_torpedoes[3].get() + cistern12[3].get() + oil2_1[3].get() + oil2_2[3].get() + oil1_2[3].get() +
+                water1[3].get() + food[3].get() + food5[3].get())
+            summ1[4].set(
+                Spare_torpedoes[4].get() + cistern12[4].get() + oil2_1[4].get() + oil2_2[4].get() + oil1_2[4].get() +
+                water1[4].get() + food[4].get() + food5[4].get())
 
+            text_summ10 = Label(tab1, text=str(summ1[0].get()))
+            text_summ12 = Label(tab1, text=str(summ1[2].get()))
+            if float(summ1[3].get()) != 0:
+                text_summ13 = Label(tab1, text=str(summ1[3].get()), fg='red')
+            else:
+                text_summ13 = Label(tab1, text=str(summ1[3].get()), fg='green')
+            text_summ14 = Label(tab1, text=str(summ1[4].get()))
 
             text35.grid(row=3, column=5)
             text36.grid(row=3, column=6)
@@ -438,8 +446,20 @@ def input_window():
             text96.grid(row=9, column=6)
             text105.grid(row=10, column=5)
             text106.grid(row=10, column=6)
+
+            '''
             text115.grid(row=11, column=5)
             text116.grid(row=11, column=6)
+            '''
+            #итого переменных грузов:
+            text_summ10.grid(row=11, column=1)
+            text_summ12.grid(row=11, column=4)
+            text_summ13.grid(row=11, column=5)
+            text_summ14.grid(row=11, column=6)
+
+
+
+
 
             input_window.update_idletasks()
             input_window.update()
@@ -473,9 +493,7 @@ def input_window():
     en81.grid(row=10, column=1)
     en82.grid(row=10, column=2)
     en83.grid(row=10, column=4)
-    en91.grid(row=11, column=1)
-    en92.grid(row=11, column=2)
-    en93.grid(row=11, column=4)
+
 
     #text35.grid(row=3, column=5)
 
@@ -535,6 +553,8 @@ class Submarine:
         self.d24 = PhotoImage(file="pictures/d24.gif")
         self.d25 = PhotoImage(file="pictures/d25.gif")
 
+
+
         self.div = [self.d1, self.d2, self.d3, self.d4, self.d5, self.d6, self.d7, self.d8, self.d9, self.d10, self.d11,
                     self.d12,
                     self.d13, self.d14, self.d15, self.d16, self.d17, self.d18, self.d19, self.d20, self.d21, self.d22,
@@ -548,6 +568,7 @@ class Submarine:
         self.pos = self.canvas.coords(self.id)
         self.xy = [(300, 115), (900, 115), (900, 386), (300, 386)]
 
+        self.pos = self.canvas.coords(self.id)
     def draw(self):
         pos = self.canvas.coords(self.id)
         if pos[1] >= 500 or pos[1] <= 250:
@@ -597,8 +618,24 @@ class Submarine:
             self.draw()
             system()
 
+    def rotate():
+        image = Image.open(self.d1)
+        angle = 0
+        while True:
+            tkimage = ImageTk.PhotoImage(image.rotate(angle))
+            canvas_obj = self.canvas.create_image(
+                250, 250, image=tkimage)
+            self.master.after_idle(self.update)
+            yield
+            self.canvas.delete(canvas_obj)
+            angle += 10
+            angle %= 360
+
+
+        return new_points
 
 s = Submarine()
+Submarine.rotate()
 btn1 = Button(tk, text="Всплытие!", command=s.emersion, width=15).place(x=1050, y=650)
 btn2 = Button(tk, text="Погружение!", command=s.diving, width=15).place(x=1050, y=700)
 
