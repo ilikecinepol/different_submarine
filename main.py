@@ -619,20 +619,9 @@ class Submarine:
             system()
 
     def rotate():
-        image = Image.open(self.d1)
-        angle = 0
-        while True:
-            tkimage = ImageTk.PhotoImage(image.rotate(angle))
-            canvas_obj = self.canvas.create_image(
-                250, 250, image=tkimage)
-            self.master.after_idle(self.update)
-            yield
-            self.canvas.delete(canvas_obj)
-            angle += 10
-            angle %= 360
+        rotate_pict = [f"pictures/different_deg/{x}.gif" for x in range(-44, 90) ]
+        #print(rotate_pict)
 
-
-        return new_points
 
 s = Submarine()
 Submarine.rotate()
